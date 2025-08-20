@@ -55,5 +55,16 @@ Para que la configuración funcione correctamente se necesitan:
 
    ```bash
    conky
+   ```
+   Si se visualiza correctamente se puede lanzar en segundo plano
+
+   ```bash
+   conky &
+
+Por último, para no tener que lanzarlo después de cada reinicio, se puede añadir como servicio o bien en KDE configurarlo en Autostart
+
+![Ejemplo de Conky](images/AutostartKDEsample.png)
+
+## Aspecto final
 
 ![Ejemplo de Conky](images/sample.png)
