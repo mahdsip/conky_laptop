@@ -1,0 +1,131 @@
+# --------------------------------------------------------------------------------------------- #
+#
+# .conkyrc
+#
+# Some of the sites that proved most usful include:
+#   http://mylinuxramblings.wordpress.com/2010/03/23/how-to-configure-the-conky-system-monitor/`
+#   http://crunchbanglinux.org/wiki/conky
+#   http://lusule.wordpress.com/2008/08/07/how-to-4/
+#
+# --------------------------------------------------------------------------------------------- #
+
+# -------------------- Conky's Run Time Parameters -------------------- #
+update_interval 3.0 # Conky update interval in seconds
+total_run_times 0   # Number of updates before quitting.  Set to zero to 
+no_buffers yes      # Subtract file system buffers from used memory?
+cpu_avg_samples 2   # Number of cpu samples to average. Set to 1 to disable averaging
+net_avg_samples 2   # Number of net samples to average. Set to 1 to disable averaging
+
+# -------------------- Conky's General Look and Feel -------------------- #
+# --- defualt values --- #
+default_color black                     # Default color and border color
+#default_bar_size 0 6                    # Specify a default width and height for bars.
+#default_gauge_size 25 25                # Specify a default width and height for gauges.
+#default_graph_size 0 25                 # Specify a default width and height for graphs.
+default_outline_color 000000            # Default border and text outline color
+default_shade_color 000000              # Default border and text shading color
+
+# --- predefined colors - http://www.kgym.jp/freesoft/xrgb.html --- #
+color0 FFFFFF                           # white
+color1 FFA500                           # orange
+color2 B22222                           # firebrick
+color3 696969                           # dim gray
+color4 D3D3D3                           # light gray
+color5 2F4F4F                           # dark slate gray
+color6 FFEC8B                           # light golden rod
+color7 54FF9F                           # sea green
+color8 FF8C69                           # salmon
+color9 FFE7BA                           # wheat
+
+
+# --- window layout and options --- #
+own_window yes              # Conky creates its own window instead of using desktop
+own_window_type normal      # If own_window is yes, use type normal, desktop, or override
+own_window_transparent yes  # Use pseudo transparency with own_window?
+#own_window_colour blue      # If own_window_transparent is no, set the background colour
+double_buffer yes           # Use double buffering (reduces flicker)
+use_spacer none             # Adds spaces to stop object from moving
+maximum_width 300           # Maximum width of window in pixels
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+# --- window placment --- #
+alignment bottom_left
+
+# --- borders, margins, and outlines --- #
+draw_graph_borders no                   # Do you want to draw borders around graphs
+#border_inner_margin 9                   # Window's inner border margin (in pixels)
+#border_outer_margin 5                   # Window's outer border margin (in pixels)
+gap_x 10                                # Gap between borders of screen and text (on x-axis)
+gap_y 10                                # Gap between borders of screen and text (on y-axis)
+#border_width 10                         # Window's border width (in pixels)
+
+# --- Text --- #
+draw_outline no                     # Do you want ot draw outlines
+draw_shades no                      # Do you want to draw shades
+draw_borders no                     # Do you want to draw borders around text
+uppercase no                        # set to yes if you want all text to be in uppercase
+use_xft yes                         # use the X FreeType interface library (anti-aliased font)
+font Snap.se:size=8
+xftfont Snap.se:size=8   # Xft font to be used
+
+#background = no
+xftfont 
+xftalpha 0.1
+minimum_size 200 6
+override_utf8_locale no
+own_window_argb_visual yes
+
+
+# -------------------- Conky's Displayed System Monitoring Parameters -------------------- #
+TEXT
+#Configuración de los datos que se muestran
+ 
+#Nombre del sistema y la versión del kernel
+${font Debian:style=bold:size:12}$sysname $alignr $kernel
+${font Debian:style=bold:size:12}Plasma $alignr ${exec plasmashell --version}
+
+#Información de los procesadores y bara de estado del uso
+${font Debian:style=bold:size=12}Procesadores $hr
+${font Debian:style=bold:size=8}CPU1: ${cpu cpu1}% ${cpubar cpu1}
+Core1: ${cpu cpu1}% $alignr ${exec awk '/cpu MHz/{i++}i==1{printf "%.f",$4; exit}' /proc/cpuinfo} MHz $alignr ${cpubar cpu1 8,60}
+Core2: ${cpu cpu2}% $alignr ${exec awk '/cpu MHz/{i++}i==2{printf "%.f",$4; exit}' /proc/cpuinfo} MHz $alignr ${cpubar cpu2 8,60}
+Core3: ${cpu cpu3}% $alignr ${exec awk '/cpu MHz/{i++}i==3{printf "%.f",$4; exit}' /proc/cpuinfo} MHz $alignr ${cpubar cpu3 8,60}
+Core4: ${cpu cpu4}% $alignr ${exec awk '/cpu MHz/{i++}i==4{printf "%.f",$4; exit}' /proc/cpuinfo} MHz $alignr ${cpubar cpu4 8,60}
+${font Debian:style=bold:size=8}CPU2: ${cpu cpu2}% ${cpubar cpu2}
+Core5: ${cpu cpu5}% $alignr ${exec awk '/cpu MHz/{i++}i==5{printf "%.f",$4; exit}' /proc/cpuinfo} MHz $alignr ${cpubar cpu5 8,60}
+Core6: ${cpu cpu6}% $alignr ${exec awk '/cpu MHz/{i++}i==6{printf "%.f",$4; exit}' /proc/cpuinfo} MHz $alignr ${cpubar cpu6 8,60}
+Core7: ${cpu cpu7}% $alignr ${exec awk '/cpu MHz/{i++}i==7{printf "%.f",$4; exit}' /proc/cpuinfo} MHz $alignr ${cpubar cpu7 8,60}
+Core8: ${cpu cpu8}% $alignr ${exec awk '/cpu MHz/{i++}i==8{printf "%.f",$4; exit}' /proc/cpuinfo} MHz $alignr ${cpubar cpu8 8,60}
+
+#Temperatura de los procesadores
+Temperatura: $alignr ${acpitemp} C
+#Estado de las particiones principales, la RAM y la SWAP
+${font Debian:style=bold:size=12}Discos, ram y swap  $hr
+${font Debian:style=bold:size=8}HOME $alignr ${fs_used /home} / ${fs_size /home} 
+${fs_bar /home}
+${font Debian:style=bold:size=8}ROOT $alignr ${fs_used /} / ${fs_size /}
+${fs_bar /}
+${font Debian:style=bold:size=8}RAM $alignr $mem / $memmax
+${membar}
+${font Debian:style=bold:size=8}SWAP $alignr $swap / /$swapmax
+$swapbar
+#Estado de las interfaces de red
+${font Debian:style=bold:size=12}Interfaz de red $hr
+${font Debian:style=bold:size=8}Conex:${tcp_portmon 1 65535 count}
+${font Debian:style=bold:size=8}IP pub ${execi 1000  wget -q -O- http://ipecho.net/plain; echo}
+${font Debian:style=bold:size=8}IP eth: ${addrs enp1s0}
+${font Debian:style=bold:size=8}IP wlan: ${addrs wlan0}
+${font Debian:style=bold:size=8}Down $alignr ${downspeed enp1s0}/s
+${downspeedgraph enp1s0 30,210 01df01 10fd10}
+${font Debian:style=bold:size=8}Up $alignr ${upspeed enp1s0}/s
+${upspeedgraph enp1s0 30,210 0000ff ff0000}
+#Uso de CPU de las aplicaciones
+${font Debian:style=bold:size=12}Uso CPU aplicaciones $hr
+${font Debian:style=bold:size=8}${top name 1}$alignr${top cpu 1}%
+${top name 2}$alignr${top cpu 2}%
+${top name 3}$alignr${top cpu 3}%
+#Uso de memoria RAM de las aplicaciones
+${font Debian:style=bold:size=12}Uso RAM aplicaciones $hr
+${font Debian:style=bold:size=8}${top_mem name 1}$alignr${top_mem mem 1}%
+${top_mem name 2}$alignr${top_mem mem 2}%
+${top_mem name 3}$alignr${top_mem mem 3}%
